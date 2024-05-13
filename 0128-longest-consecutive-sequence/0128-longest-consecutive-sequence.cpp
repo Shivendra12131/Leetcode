@@ -1,31 +1,35 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        if(nums.size()==0) return 0;
+        if(nums.empty()) return 0;
         int n=nums.size();
-        sort(nums.begin(),nums.end());
-        int currentcount=1;
-        int longest=1;
-        int lastsmaller=INT_MIN;
-        
-        
-        for(int i=0;i<n;i++)
+        unordered_set<int>st;
+        for(int i=0;i<n;i++)//insert elements into the set
         {
-            if(nums[i]-1==lastsmaller)
+            st.insert(nums[i]);
+        }
+        int longest=1;
+        for(auto it:st)
+        {
+            if(st.find(it-1)==st.end())
+//this is the starting point har baar starting point alag hoga naye elements ke liey
             {
-                currentcount++;
-                lastsmaller=nums[i];
+                int cnt=1;
+                int x=it;
+                while(st.find(x+1)!=st.end())
+//set me find karo jo o(1) leta hai find karne me 
+                {
+                    cnt++;
+                    x=x+1;
+                }
+                longest=max(longest,cnt);
                 
             }
-            else if(nums[i]!=lastsmaller)
-            {
-                lastsmaller=nums[i];
-                currentcount=1;
-            }
-            longest=max(longest,currentcount);
+            
             
         }
         return longest;
+        
         
     }
 };
