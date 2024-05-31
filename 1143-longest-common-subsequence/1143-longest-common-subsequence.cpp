@@ -20,10 +20,12 @@ private:
             for(int j=1;j<m+1;j++)
             {
                 if(text1[i-1]==text2[j-1])
+                // agr dono same hai to i-1 aur j-1 call karna padega
                 {
                     dp[i][j]=1+dp[i-1][j-1];
                 }
                 else{
+                    // nhi same hai to 2 call hoga aur dono ka max le lenge hm
                     dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
                 }
                 
@@ -36,6 +38,8 @@ public:
     int longestCommonSubsequence(string text1, string text2) {
         int n = text1.length();
         int m = text2.length();
+        //initialisation for top down approach
+        
         vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
         for(int i=0;i<n+1;i++)
         {
