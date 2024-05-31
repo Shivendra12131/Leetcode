@@ -1,6 +1,7 @@
 class Solution {
 private:
     int longestCommonSubsequence(string& text1, string& text2, int n, int m, vector<vector<int>>& dp) {
+        //memoization 
         if (n == 0 || m == 0) return 0;
         if (dp[n][m] != -1) return dp[n][m];
 
