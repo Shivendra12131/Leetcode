@@ -5,7 +5,7 @@ public:
     int n = t.size();
   int i=0;
      int j=0;
-     while(i<m&&j<n)
+     while(i<m)
      {
          if(s[i]==t[j])
          {
@@ -16,6 +16,6 @@ public:
              i++;
          }
      }
-     return n-j;
+     return n-(j);
  }
 };
