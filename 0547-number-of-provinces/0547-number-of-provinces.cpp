@@ -1,42 +1,38 @@
-#include <vector>
-using namespace std;
+// in this question i will use dfs for every starting node starting node can be 1,2,3,.... 
+// i will use visited arrray for getting track the node which i have traversed earlier and for every node i traversed called (dfs )  i will make it visited so that starting node can be not same again and again 
+// adjacennct matrix is given i can use adjacency list as well as adjanceny matrix 
+
 
 class Solution {
-private:
-    void dfs(vector<int> adj[], int node, vector<int>& vis) {
-        vis[node] = 1;
-        for (auto it : adj[node]) {
-            if (!vis[it]) {
-                dfs(adj, it, vis);
+    private:
+    void dfs(vector<vector<int>>&isConnected,vector<int>&vis,int node)
+    {
+        vis[node]=1;
+        for(int j=0;j<isConnected.size();j++)
+        {
+            if(!vis[j]&&isConnected[node][j]==1)
+            {
+                dfs(isConnected,vis,j);
             }
         }
+        
     }
-
 public:
+    
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int n = isConnected.size();
-        
-        // Make an adjacency list
-        vector<int> adj[n+1];
-        
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (isConnected[i][j] == 1 ) {
-                    adj[i+1].push_back(j+1);
-                    adj[j+1].push_back(i+1);
-                }
-            }
-        }
-
-        vector<int> vis(n+1, 0);
-        int cnt = 0;
-        for (int i = 1; i <= n; i++) {
-            if (vis[i] == 0) {
+        int n=isConnected.size();
+        vector<int>vis(n,0);
+        int cnt=0;
+        for(int i=0;i<n;i++)
+        {
+            if(!vis[i])
+            {
                 cnt++;
-                dfs(adj, i, vis);
+                dfs(isConnected,vis,i);
             }
         }
         
         return cnt;
+        
     }
 };
