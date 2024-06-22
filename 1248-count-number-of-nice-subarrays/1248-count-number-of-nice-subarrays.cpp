@@ -17,9 +17,12 @@ public:
         for(int i=0;i<nums.size();i++)
         {
             prefix_sum+=nums[i];
-            int remove=prefix_sum-k;
-            cnt+=mpp[remove];
-            mpp[prefix_sum]+=1;
+            int check=prefix_sum-k;
+            if(mpp.find(check)!=mpp.end())
+            {
+                cnt+=mpp[check];
+            }
+            mpp[prefix_sum]++;
             
         }
     
