@@ -1,22 +1,26 @@
 class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-        unordered_map<int, int> countMap;
-        vector<int> result;
-
-        // Count the occurrences of each number in nums1
-        for (int num : nums1) {
-            countMap[num]++;
+        int n=nums1.size();
+        int m=nums2.size();
+        vector<int>ans;
+        unordered_map<int,int>mpp1;
+        int j=0;
+        sort(nums1.begin(),nums1.end());
+        for(int i=0;i<n;i++)
+        {
+            mpp1[nums1[i]]++;
         }
-
-        // Find the intersection by checking counts in nums2
-        for (int num : nums2) {
-            if (countMap[num] > 0) {
-                result.push_back(num);
-                countMap[num]--;
+        while(j<m)
+        {
+            if(mpp1[nums2[j]]>0)
+            {
+                ans.push_back(nums2[j]);
+                mpp1[nums2[j]]--;
             }
+            j++;
         }
-
-        return result;
+        return ans;
+        
     }
 };
